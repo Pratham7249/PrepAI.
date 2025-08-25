@@ -1,0 +1,71 @@
+<!-- Header Section -->
+<header class="text-center mb-10">
+    <h1 class="text-4xl md:text-5xl font-bold text-[#0B2A4F]">AI Revision & Mnemonics Tool</h1>
+    <p class="text-[#6C757D] mt-2">Paste your notes or a list of terms to instantly create powerful study aids.</p>
+</header>
+
+<!-- Main App Container -->
+<div class="max-w-4xl mx-auto">
+    <div class="bg-[#F8F9FA] p-8 rounded-2xl shadow-xl border border-gray-200">
+        <!-- Input Area -->
+        <div>
+            <label for="user-input" class="mb-2 font-medium block text-[#0B2A4F]">Enter your text, notes, or list of items here:</label>
+            <textarea id="user-input" rows="8" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00C49A] transition" placeholder="e.g., Boron, Aluminum, Gallium, Indium, Thallium..."></textarea>
+        </div>
+
+        <!-- Tool Tabs -->
+        <div class="my-6 border-b border-gray-200">
+            <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                <button class="tab-btn active whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" data-tool="mnemonic">
+                    <i class="fa-solid fa-lightbulb mr-2"></i> Create Mnemonic
+                </button>
+                <button class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" data-tool="flashcards">
+                    <i class="fa-solid fa-clone mr-2"></i> Generate Flashcards
+                </button>
+                <button class="tab-btn whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm" data-tool="summary">
+                    <i class="fa-solid fa-list-check mr-2"></i> Summarize Concepts
+                </button>
+            </nav>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="text-center">
+            <button id="generate-btn" class="bg-[#00C49A] text-white font-bold py-3 px-10 rounded-lg hover:bg-teal-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Generate Study Aid
+            </button>
+        </div>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="screen hidden text-center p-8">
+        <div class="loader mx-auto border-t-[#00C49A]"></div>
+        <p class="mt-4 text-lg font-medium text-[#0B2A4F]">Generating study aid...</p>
+    </div>
+
+    <!-- Error Display -->
+    <div id="error-container" class="hidden mt-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative" role="alert"></div>
+
+    <!-- Result Display -->
+    <div id="result-container" class="hidden mt-8 bg-[#F8F9FA] p-8 rounded-2xl shadow-xl border border-gray-200">
+        <div id="result-text" class="prose max-w-none text-[#0B2A4F]"></div>
+    </div>
+</div>
+
+<!-- Load the dedicated script for this page -->
+<script src="/js/revision.js"></script>
+
+<!-- Add a small style block for the active tab -->
+<style>
+    .tab-btn.active {
+        border-color: #00C49A;
+        color: #00C49A;
+    }
+    .tab-btn {
+        border-color: transparent;
+        color: #6C757D;
+    }
+    .tab-btn:hover {
+        border-color: #d1d5db;
+        color: #0B2A4F;
+    }
+</style>

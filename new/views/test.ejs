@@ -1,0 +1,106 @@
+<!-- Header -->
+<header class="text-center mb-10">
+    <h1 class="text-4xl md:text-5xl font-bold text-[#0B2A4F]">AI-Powered JEE Main Mock Test</h1>
+    <p class="text-[#6C757D] mt-2">Personalized tests and feedback powered by Google Gemini</p>
+</header>
+
+<!-- Main App Container -->
+<div id="app" class="max-w-4xl mx-auto">
+
+    <!-- Setup Screen -->
+    <div id="setup-screen" class="screen bg-[#F8F9FA] p-8 rounded-2xl shadow-xl border border-gray-200">
+        <h2 class="text-2xl font-semibold mb-6 text-center text-[#0B2A4F]">Create Your Custom Test</h2>
+        <div class="space-y-8">
+            <!-- Subject & Topic -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="subject" class="mb-2 font-medium block text-[#0B2A4F]">1. Select Subject</label>
+                    <select id="subject" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00C49A] transition">
+                        <option value="" disabled selected>-- Choose a Subject --</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Mathematics">Mathematics</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="topic" class="mb-2 font-medium block text-[#0B2A4F]">2. Enter Topic</label>
+                    <input type="text" id="topic" placeholder="e.g., Rotational Motion" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00C49A] transition">
+                </div>
+            </div>
+
+            <!-- Difficulty Selection -->
+            <div>
+                <label class="mb-3 font-medium block text-[#0B2A4F] text-center">3. Select Difficulty</label>
+                <div id="difficulty-selector" class="flex justify-center space-x-4">
+                    <button data-difficulty="Easy" class="difficulty-btn w-28 py-2 border-2 border-gray-300 rounded-lg font-semibold text-[#6C757D] transition-all duration-300">Easy</button>
+                    <button data-difficulty="Medium" class="difficulty-btn selected w-28 py-2 border-2 border-gray-300 rounded-lg font-semibold text-[#6C757D] transition-all duration-300">Medium</button>
+                    <button data-difficulty="Hard" class="difficulty-btn w-28 py-2 border-2 border-gray-300 rounded-lg font-semibold text-[#6C757D] transition-all duration-300">Hard</button>
+                </div>
+            </div>
+
+            <!-- Duration Input -->
+            <div class="flex flex-col items-center">
+                <label for="duration" class="mb-2 font-medium text-[#0B2A4F]">4. Set Test Duration (minutes)</label>
+                <input type="number" id="duration" value="15" min="5" max="180" class="w-48 text-center p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00C49A] transition">
+                <p class="text-sm text-[#6C757D] mt-2">Based on JEE standards (~2.4 mins/question).</p>
+            </div>
+        </div>
+        <div class="text-center">
+            <button id="start-btn" class="mt-10 bg-[#00C49A] text-white font-bold py-3 px-10 rounded-lg hover:bg-teal-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Generate Test
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="screen hidden text-center p-8">
+        <div class="loader mx-auto border-t-[#00C49A]"></div>
+        <p class="mt-4 text-lg font-medium text-[#0B2A4F]">Generating your personalized test...</p>
+        <p class="text-[#6C757D]">Please wait, the AI is crafting your questions.</p>
+    </div>
+
+    <!-- Test Screen -->
+    <div id="test-screen" class="screen hidden">
+        <div class="bg-[#F8F9FA]/80 backdrop-blur-sm p-4 rounded-xl shadow-md mb-6 flex justify-between items-center sticky top-4 z-10 border border-gray-200">
+            <h2 id="question-counter" class="text-lg font-semibold text-[#0B2A4F]">Question 1 / 10</h2>
+            <div id="timer" class="text-2xl font-bold text-red-600 bg-red-100 px-4 py-2 rounded-lg">15:00</div>
+        </div>
+        <div id="question-container" class="bg-[#F8F9FA] p-8 rounded-2xl shadow-xl border border-gray-200">
+            <p id="question-subject" class="text-sm font-medium text-teal-800 bg-teal-100 inline-block px-3 py-1 rounded-full mb-4">Physics</p>
+            <p id="question-text" class="text-xl mb-6 text-[#0B2A4F]">What is the principle of a transformer?</p>
+            <div id="options-container" class="space-y-4"></div>
+        </div>
+        <div class="flex justify-between mt-8">
+            <button id="prev-btn" class="bg-gray-200 text-[#0B2A4F] font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition-all duration-300">Previous</button>
+            <button id="next-btn" class="bg-[#00C49A] text-white font-bold py-2 px-6 rounded-lg hover:bg-teal-600 transition-all duration-300">Next</button>
+            <button id="submit-btn" class="bg-[#00C49A] text-white font-bold py-2 px-6 rounded-lg hover:bg-teal-600 transition-all duration-300 hidden">Submit Test</button>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="results-screen" class="screen hidden">
+         <div class="bg-[#F8F9FA] p-8 rounded-2xl shadow-xl text-center border border-gray-200">
+            <h2 class="text-3xl font-bold mb-4 text-[#0B2A4F]">Test Complete!</h2>
+            <p class="text-xl text-[#6C757D]">Your Score:</p>
+            <p id="score" class="text-6xl font-bold my-4 text-[#00C49A]">0 / 0</p>
+            <div id="feedback-loader" class="text-center p-4">
+                <div class="loader mx-auto border-t-[#00C49A]"></div>
+                <p class="mt-4 text-lg font-medium text-[#0B2A4F]">Analyzing your performance and generating feedback...</p>
+            </div>
+            <div id="ai-feedback" class="mt-6 text-left border-t pt-6 hidden prose max-w-none"></div>
+            <button id="restart-btn" class="mt-8 bg-[#00C49A] text-white font-bold py-3 px-8 rounded-lg hover:bg-teal-600 transition-all duration-300">Take Another Test</button>
+        </div>
+    </div>
+</div>
+
+<!-- Load the dedicated script for this page -->
+<script src="/js/test.js"></script>
+
+<!-- Add a small style block for the selected difficulty button -->
+<style>
+    .difficulty-btn.selected {
+        background-color: #00C49A;
+        color: white;
+        border-color: #00C49A;
+    }
+</style>

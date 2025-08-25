@@ -1,0 +1,53 @@
+<!-- Header Section -->
+<header class="text-center mb-10">
+    <h1 class="text-4xl md:text-5xl font-bold text-[#0B2A4F]">Snap & Solve AI Doubt Tutor</h1>
+    <p class="text-[#6C757D] mt-2">Stuck on a problem? Upload a picture for a detailed, step-by-step solution.</p>
+</header>
+
+<!-- Main App Container -->
+<div class="max-w-4xl mx-auto">
+    <div class="bg-[#F8F9FA] p-8 rounded-2xl shadow-xl border border-gray-200">
+        <!-- Drag and Drop Area -->
+        <div id="image-drop-area" class="w-full h-64 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-center cursor-pointer transition hover:border-[#00C49A] hover:bg-teal-50">
+            <img src="" alt="Image Preview" id="image-preview" class="hidden max-h-full max-w-full object-contain rounded-md">
+            <div id="placeholder" class="text-[#6C757D]">
+                <i class="fa-solid fa-cloud-arrow-up text-4xl text-[#00C49A]"></i>
+                <p class="mt-2 font-semibold">Drag & drop your image here</p>
+            </div>
+        </div>
+
+        <!-- Hidden file input -->
+        <input type="file" id="image-input" class="hidden" accept="image/*">
+
+        <!-- Controls -->
+        <div class="mt-6 flex flex-col items-center space-y-4">
+            <p id="file-name" class="text-sm text-[#6C757D]">No file selected.</p>
+            <div>
+                <button class="file-input-label bg-gray-200 text-[#0B2A4F] font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition-all duration-300">
+                    <i class="fa-solid fa-paperclip mr-2"></i> Choose File
+                </button>
+                <button id="analyze-btn" class="bg-[#00C49A] text-white font-bold py-2 px-6 rounded-lg hover:bg-teal-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                    <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Analyze Doubt
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="screen hidden text-center p-8">
+        <div class="loader mx-auto border-t-[#00C49A]"></div>
+        <p class="mt-4 text-lg font-medium text-[#0B2A4F]">Analyzing your image...</p>
+    </div>
+
+    <!-- Error Display -->
+    <div id="error-container" class="hidden mt-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative" role="alert"></div>
+    
+    <!-- Result Display -->
+    <div id="result-container" class="hidden mt-8 bg-[#F8F9FA] p-8 rounded-2xl shadow-xl border border-gray-200">
+        <h3 class="text-2xl font-bold mb-4 text-[#0B2A4F] border-b pb-2">Here's the breakdown:</h3>
+        <div id="result-text" class="prose max-w-none text-[#0B2A4F]"></div>
+    </div>
+</div>
+
+<!-- Load the dedicated script for this page -->
+<script src="/js/doubt.js"></script>
