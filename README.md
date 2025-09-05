@@ -92,6 +92,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📧 Contact
 
-Pratham - [@your_twitter_handle](https://twitter.com/your_twitter_handle) - your-email@example.com
+Pratham - www.linkedin.com/in/prathamesh-edlawar-1615a9350
 
 Project Link: [https://github.com/Pratham7249/PrepAI.git](https://github.com/Pratham7249/PrepAI.git)
